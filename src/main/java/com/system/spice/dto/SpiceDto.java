@@ -22,4 +22,6 @@ public class SpiceDto implements Serializable {
     String unit;
     Integer quantityAvailable;
     Boolean status;
+    Integer position;
+
 }

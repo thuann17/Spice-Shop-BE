@@ -1,7 +1,6 @@
 package com.system.spice.controller.system;
 
 import com.system.spice.dto.UserDto;
-import com.system.spice.entity.User;
 import com.system.spice.model.system.ChangePasswordModel;
 import com.system.spice.model.system.Login;
 import com.system.spice.service.system.UserService;

@@ -46,6 +46,9 @@ public class Spice {
     @Column(name = "status")
     private Boolean status;
 
+    @Column(name = "position")
+    private Integer position;
+
     @ManyToOne(fetch = FetchType.LAZY)
     @OnDelete(action = OnDeleteAction.CASCADE)
     @JoinColumn(name = "discount_id")
