@@ -31,8 +31,9 @@ public class SecurityConfig {
                                 "/auth/register-manager",
                                 "/auth/change-password").permitAll()
                         .requestMatchers("/api/manager/*").permitAll()
+                        .requestMatchers("/api/services/**").permitAll()// bor qua xaxcs thucwj
                         .anyRequest().authenticated()).
-                httpBasic(Customizer.withDefaults()).
+//                httpBasic(Customizer.withDefaults()).
                 sessionManagement(
                         session
                                 -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS)).build();
