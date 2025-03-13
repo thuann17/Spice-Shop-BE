@@ -32,6 +32,7 @@ public class SecurityConfig {
                                 "/auth/change-password").permitAll()
                         .requestMatchers("/api/manager/*").permitAll()
                         .requestMatchers("/api/services/**").permitAll()// bor qua xaxcs thucwj
+                        .requestMatchers("/api/spices/**").permitAll()
                         .anyRequest().authenticated()).
 //                httpBasic(Customizer.withDefaults()).
                 sessionManagement(

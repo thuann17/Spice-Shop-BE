@@ -10,6 +10,7 @@ import org.hibernate.annotations.OnDelete;
 import org.hibernate.annotations.OnDeleteAction;
 
 import java.math.BigDecimal;
+import java.util.List;
 
 @Getter
 @Setter
@@ -51,4 +52,8 @@ public class Spice {
     @JoinColumn(name = "discount_id")
     private Discount discount;
 
+    @OneToMany(mappedBy = "spice", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    private List<Image> images;
+    @OneToOne(mappedBy = "spice", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    private SpiceDetail spiceDetail;
 }
