@@ -158,7 +158,6 @@ INSERT INTO Spices (name, description, price, unit, quantity_available, status, 
 
 -- thêm data cho ảnh gia vị
 INSERT INTO Images (url_image, spice_id, status) VALUES
-
 ('https://doctormuoi.vn/wp-content/uploads/2020/12/cong-dung-cua-muoi-bien.jpg', 1, 1),
 ('https://suckhoedoisong.qltns.mediacdn.vn/Images/haiyen/2017/02/13/hat_tieu.jpg', 2, 1),
 ('https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR7t0y1xlH9Pv5ZZqTv5n1DrpEyM-3rotwI0g&s', 3, 1),
