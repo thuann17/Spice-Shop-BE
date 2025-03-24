@@ -24,6 +24,7 @@ public class SpiceService {
     //  Lấy danh sách gia vị trong db
     public List<SpiceDto> getAllSpices() {
         List<Spice> spices = spiceRepository.findAll();
+        System.out.println("Count of Spices: " + spices.size());
         return convertSpiceListToDto(spices);
     }
 
@@ -33,6 +34,8 @@ public class SpiceService {
         spice.setName(model.getNameSpice());
         spice.setPrice(model.getPrice());
         spice.setUnit(model.getUnit());
+        List<Spice> spices = spiceRepository.findAll();
+        System.out.println("Count of Spices: " + spices.size());
         return convertSpiceToDto(spiceRepository.save(spice));
     }
 
@@ -44,6 +47,7 @@ public class SpiceService {
         spiceDto.setName(spice.getName());
         spiceDto.setPrice(spice.getPrice());
         spiceDto.setUnit(spice.getUnit());
+        spiceDto.setPosition(spice.getPosition());
         spiceDto.setQuantityAvailable(spice.getQuantityAvailable());
         return spiceDto;
     }
