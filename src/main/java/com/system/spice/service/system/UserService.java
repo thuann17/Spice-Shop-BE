@@ -40,32 +40,49 @@ public class UserService {
     public UserDto registerManager(Login user) {
         User u = new User();
         u.setUsername(user.getUsername());
-        u.setPassword(encoder.encode(user.getPassword()));
+        
+        // Kiểm tra nếu mật khẩu đã được mã hóa rồi thì không mã hóa lại
+        if (!user.getPassword().startsWith("$2a$")) {
+            u.setPassword(encoder.encode(user.getPassword()));
+        } else {
+            u.setPassword(user.getPassword());
+        }
+
         u.setCreateAt(Instant.now());
         u.setRole(getRoleByManager("MANAGER"));
         repo.save(u);
         return convertToDto(u);
     }
 
+
     //Service đăng nhập
     public Map<String, String> verify(Login user) {
         Map<String, String> response = new HashMap<>();
         try {
-            Authentication authentication = authManager.authenticate(
-                    new UsernamePasswordAuthenticationToken(user.getUsername(), user.getPassword())
-            );
-            if (authentication.isAuthenticated()) {
-                response.put("username", user.getUsername());
-                response.put("token", jwtService.generateToken(user.getUsername()));
-                response.put("role", getRoleByUsername(user.getUsername()));
-                response.put("message", "Đăng nhập thành công!");
+            User dbUser = repo.findByUsername(user.getUsername()).orElse(null);
+            if (dbUser == null) {
+                response.put("message", "Tài khoản không tồn tại!");
                 return response;
             }
+
+            // Kiểm tra mật khẩu nhập vào có khớp với mật khẩu đã mã hóa không
+            if (!encoder.matches(user.getPassword(), dbUser.getPassword())) {
+                response.put("message", "Sai mật khẩu!");
+                return response;
+            }
+
+            // Nếu đúng thì tạo token
+            response.put("username", user.getUsername());
+            response.put("token", jwtService.generateToken(user.getUsername()));
+            response.put("role", getRoleByUsername(user.getUsername()));
+            response.put("message", "Đăng nhập thành công!");
         } catch (Exception e) {
-            response.put("message", "Sai thông tin đăng nhập!");
+            System.out.println("Lỗi đăng nhập: " + e.getMessage());
+            response.put("message", "Lỗi đăng nhập!");
         }
         return response;
     }
+
 
     //    API đổi mật khẩu
     public Map<String, String> changePassword(ChangePasswordModel model) {
