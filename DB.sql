@@ -4,6 +4,7 @@ create table roles (
                        id int auto_increment primary key,
                        role_name ENUM('CUSTOMER', 'STAFF', 'MANAGER') unique not null
 );
+
 INSERT INTO Roles (role_name) VALUES ('CUSTOMER');
 INSERT INTO Roles (role_name) VALUES ('MANAGER');
 INSERT INTO Roles (role_name) VALUES ('STAFF');
@@ -20,6 +21,23 @@ create table users(
                       role_id int,
                       foreign key(role_id) references roles(id) on delete set null
 );
+-- Thêm tài khoản CUSTOMER
+INSERT INTO users (username, full_name, email, number_phone, password, role_id)
+VALUES ('customer01', 'Nguyen Van A', 'customer01@example.com', '0987654321', '123456',
+        (SELECT id FROM roles WHERE role_name = 'CUSTOMER'));
+
+-- Thêm tài khoản STAFF
+INSERT INTO users (username, full_name, email, number_phone, password, role_id)
+VALUES ('staff01', 'Tran Thi B', 'staff01@example.com', '0912345678', '123456',
+        (SELECT id FROM roles WHERE role_name = 'STAFF'));
+
+-- Thêm tài khoản MANAGER
+INSERT INTO users (username, full_name, email, number_phone, password, role_id)
+VALUES ('manager01', 'Le Van C', 'manager01@example.com', '0901234567', '123456',
+        (SELECT id FROM roles WHERE role_name = 'MANAGER'));
+
+
+
 
 -- Menu trong bàn tiệc
 CREATE TABLE CateringMenus (
