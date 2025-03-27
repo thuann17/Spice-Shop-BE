@@ -14,6 +14,8 @@ public class SpiceDto implements Serializable {
     private String description;
     private BigDecimal price;
     private String unit;
+    private Integer position;
+
     private Integer quantityAvailable;
     private Boolean status;
     private List<String> imageUrls;
