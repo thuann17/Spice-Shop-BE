@@ -5,8 +5,6 @@ import jakarta.validation.constraints.Size;
 import lombok.Getter;
 import lombok.Setter;
 import org.hibernate.annotations.ColumnDefault;
-import org.hibernate.annotations.OnDelete;
-import org.hibernate.annotations.OnDeleteAction;
 
 import java.time.Instant;
 
@@ -21,7 +19,7 @@ public class Image {
     private Integer id;
 
     @Size(max = 225)
-    @Column(name = "url_image", length = 225)
+    @Column(name = "url_image", length = 225) 
     private String urlImage;
 
     @ColumnDefault("CURRENT_TIMESTAMP")
@@ -31,9 +29,12 @@ public class Image {
     @Column(name = "status")
     private Boolean status;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @OnDelete(action = OnDeleteAction.CASCADE)
+    @ManyToOne
     @JoinColumn(name = "spice_id")
-    private com.system.spice.entity.Spice spice;
+    private Spice spice;
 
+    //  lấy `urlImage`
+    public String getUrl() {
+        return this.urlImage; 
+    }
 }
