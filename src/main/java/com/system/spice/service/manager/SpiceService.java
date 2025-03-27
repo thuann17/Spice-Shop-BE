@@ -47,7 +47,7 @@ public class SpiceService {
         spiceDto.setName(spice.getName());
         spiceDto.setPrice(spice.getPrice());
         spiceDto.setUnit(spice.getUnit());
-//        spiceDto.setPosition(spice.getPosition());
+        spiceDto.setPosition(spice.getPosition());
         spiceDto.setQuantityAvailable(spice.getQuantityAvailable());
         return spiceDto;
     }
