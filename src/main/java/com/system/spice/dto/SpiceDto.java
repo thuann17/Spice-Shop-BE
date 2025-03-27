@@ -2,6 +2,9 @@ package com.system.spice.dto;
 
 import com.system.spice.entity.Image;
 import com.system.spice.entity.Spice;
+
+import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Size;
 import lombok.Data;
 import java.io.Serializable;
 import java.math.BigDecimal;
@@ -36,4 +39,8 @@ public class SpiceDto implements Serializable {
     
     
 
+<<<<<<< HEAD
 }
+=======
+}
+>>>>>>> nhphuc
